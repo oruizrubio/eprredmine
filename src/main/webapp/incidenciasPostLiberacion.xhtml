@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+      
+<h:head></h:head> 
+<body> 
+<!-- f:metadata>
+	<f:viewAction action="#{jugadorBean.cargar}"></f:viewAction>
+</f:metadata-->
+	<h:form id="listaJugadores">
+		<!-- p:button value="Añadir jugador" outcome="anadir"/>
+		<p:commandButton action="#{jugadorBean.eliminar}" value="Eliminar jugador" update="tabla"/>
+		<p:commandButton value="Actualizar" action="#{jugadorBean.actualizar()}" update="tabla"/>				
+		<p:button value="Volver" outcome="/principal"/-->	
+		<h3>Lista de peticiones de liberación</h3>
+		<!-- h:panelGrid columns="3">
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Nombre:"/>
+				<p:inputText label="Nombre" value="#{jugadorBean.jugadorBusqueda.nombre}" />
+			</h:panelGrid>
+			<h:panelGrid columns="2">			
+				<p:outputLabel value="¿Validado?:"/>
+				<p:selectBooleanCheckbox label="¿Validado?" value="#{jugadorBean.jugadorBusqueda.validado}" />
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Fecha de alta:"/>
+				<p:calendar value="#{jugadorBean.jugadorBusqueda.fechaAlta}" label="Fecha de alta "/>
+			</h:panelGrid>  
+			<p:commandButton action="#{jugadorBean.buscar}" update="tabla" value="Buscar" />
+		</h:panelGrid-->		
+		<h:panelGrid id="Cabecera" columns="2" cellpading="4">			
+		<p:dataTable id="tabla" value="#{incidenciasBean.lista}" var="v"  >
+			<p:column headerText="Código"><p:outputLabel value="#{v.id}"/> </p:column>
+			<p:column headerText="Asunto"><p:outputLabel value="#{v.subject}"/> </p:column>
+			<p:column headerText="Descripción"> <p:outputLabel value="#{v.description}"/> </p:column>
+		</p:dataTable>
+
+		</h:panelGrid>		
+	</h:form>
+	<p class="footer">Copyright © 2018 oruiz.eprinsa.es</p>	
+</body> 
+		
+</html>
