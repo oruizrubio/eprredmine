@@ -33,9 +33,10 @@
 		</h:panelGrid-->		
 		<h:panelGrid id="Cabecera" columns="2" cellpading="4">			
 		<p:dataTable id="tabla" value="#{incidenciasBean.lista}" var="v"  >
-			<p:column headerText="Código"><p:outputLabel value="#{v.id}"/> </p:column>
-			<p:column headerText="Asunto"><p:outputLabel value="#{v.subject}"/> </p:column>
-			<p:column headerText="Descripción"> <p:outputLabel value="#{v.description}"/> </p:column>
+			<p:column headerText="Código"><p:outputLabel value="#{v.is.id}"/> </p:column>
+			<p:column headerText="Asunto"><p:outputLabel value="#{v.is.subject}"/> </p:column>
+			<p:column headerText="Descripción"> <p:outputLabel value="#{v.is.description}"/> </p:column>
+			<p:column headerText="Incidencia"> <p:outputLabel value="#{v.dsIncidencia}"/> </p:column>			
 		</p:dataTable>
 
 		</h:panelGrid>		

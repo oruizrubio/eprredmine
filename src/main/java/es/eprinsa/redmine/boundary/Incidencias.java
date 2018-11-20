@@ -18,13 +18,13 @@ import es.eprinsa.redmine.MiIssue;
 @Named("incidenciasBean")
 public class Incidencias {
 
-	List<Issue> lista;
+	List<MiIssue> lista;
 	
-	public List<Issue> getLista() {
+	public List<MiIssue> getLista() {
 		return lista;
 	}
 
-	public void setLista(List<Issue> lista) {
+	public void setLista(List<MiIssue> lista) {
 		this.lista = lista;
 	}
 
@@ -38,14 +38,14 @@ public class Incidencias {
 		InfoSesion info = new InfoSesion();
 
 		Collection<MiIssue> miLista = new ArrayList<MiIssue>();
-//		List<Issue>lista = null;
+		List<Issue>listaI = null;
 		try {		
 			System.out.println("liberacionesConQuery.");
 			IssueManager issueManager = info.getMgr().getIssueManager();
-//			lista = issueManager.getIssues("74", 1211, Include.journals);
-			setLista(issueManager.getIssues("74", 1211, Include.journals));
+			listaI = issueManager.getIssues("74", 1211, Include.journals);
+//			setLista(issueManager.getIssues("74", 1211, Include.journals));
 			
-			for (Issue r: lista) {
+			for (Issue r: listaI) {
 				MiIssue mio = new MiIssue(issueManager, r); 
 				miLista.add(mio);
 			}
@@ -59,6 +59,7 @@ public class Incidencias {
 				    	if (jo.getNotes().contains("#incidenciaspostliberacion")) {
 				    		System.out.println(++i + " -----------------------------------------------");
 				    		System.out.println(is.getIs().toString()  + " - " + jo.toString() );
+				    		is.setDsIncidencia(jo.toString());
 				    	}
 			    	} catch (NullPointerException e) {
 //			    		System.out.println(is.getIs().toString() + " no tiene incidencias");
@@ -77,6 +78,7 @@ public class Incidencias {
 		}
 		
 //		return lista;		
+		setLista(new ArrayList<MiIssue>(miLista));
 	}		
 	
 }

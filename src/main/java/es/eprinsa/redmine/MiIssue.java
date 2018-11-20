@@ -10,12 +10,20 @@ import com.taskadapter.redmineapi.bean.Journal;
 
 public class MiIssue extends Issue {
 
-	private Issue is;
-	
+	private Issue is;	
 	private Collection<Journal> listaJournals;
+	private String dsIncidencia;
 	
 	public Issue getIs() {
 		return is;
+	}
+
+	public String getDsIncidencia() {
+		return dsIncidencia;
+	}
+
+	public void setDsIncidencia(String dsIncidencia) {
+		this.dsIncidencia = dsIncidencia;
 	}
 
 	public void setIs(Issue is) {
