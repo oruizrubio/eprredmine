@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.ejb.Stateful;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import com.taskadapter.redmineapi.Include;
@@ -16,6 +18,8 @@ import com.taskadapter.redmineapi.bean.Journal;
 import es.eprinsa.redmine.MiIssue;
 
 @Named("incidenciasBean")
+@Stateful
+@SessionScoped
 public class Incidencias {
 
 	List<MiIssue> lista;
@@ -29,7 +33,16 @@ public class Incidencias {
 	}
 
 	public Incidencias() throws IOException {
-		liberacionesConQuery();
+		try {
+			if (getLista().size()==0) {
+				System.out.println("1");				
+				liberacionesConQuery();			
+			}			
+		} catch(NullPointerException e) {
+			System.out.println("2");			
+			liberacionesConQuery();
+		}
+
 	}
 
 	public void liberacionesConQuery() throws IOException {
@@ -57,9 +70,9 @@ public class Incidencias {
 			    for (Journal jo : is.getListaJournals()) {
 			    	try {
 				    	if (jo.getNotes().contains("#incidenciaspostliberacion")) {
-				    		System.out.println(++i + " -----------------------------------------------");
-				    		System.out.println(is.getIs().toString()  + " - " + jo.toString() );
-				    		is.setDsIncidencia(jo.toString());
+//				    		System.out.println(++i + " -----------------------------------------------");
+//				    		System.out.println(is.getIs().toString()  + " - " + jo.toString() );
+				    		is.setDsIncidencia(jo.getNotes());
 				    	}
 			    	} catch (NullPointerException e) {
 //			    		System.out.println(is.getIs().toString() + " no tiene incidencias");

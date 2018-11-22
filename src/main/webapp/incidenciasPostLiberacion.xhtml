@@ -32,7 +32,9 @@
 			<p:commandButton action="#{jugadorBean.buscar}" update="tabla" value="Buscar" />
 		</h:panelGrid-->		
 		<h:panelGrid id="Cabecera" columns="2" cellpading="4">			
-		<p:dataTable id="tabla" value="#{incidenciasBean.lista}" var="v"  >
+		<p:dataTable id="tabla" value="#{incidenciasBean.lista}" var="v" csv="true" excel="true" pdf="true" 
+						columnVisibility="true" copy="true" print="true"
+						paginator="true" rows="10">
 			<p:column headerText="Código"><p:outputLabel value="#{v.is.id}"/> </p:column>
 			<p:column headerText="Asunto"><p:outputLabel value="#{v.is.subject}"/> </p:column>
 			<p:column headerText="Descripción"> <p:outputLabel value="#{v.is.description}"/> </p:column>

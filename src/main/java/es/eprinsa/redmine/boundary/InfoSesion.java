@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import javax.ejb.Stateful;
+import javax.enterprise.context.SessionScoped;
 //import javax.faces.bean.ManagedBean;
 //import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
@@ -15,6 +17,8 @@ import com.taskadapter.redmineapi.RedmineManager;
 import com.taskadapter.redmineapi.RedmineManagerFactory;
 
 @Named("infoSessionBean")
+@Stateful
+@SessionScoped
 //@ManagedBean
 //@SessionScoped
 public class InfoSesion {
