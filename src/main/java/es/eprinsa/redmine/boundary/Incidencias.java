@@ -1,12 +1,13 @@
 package es.eprinsa.redmine.boundary;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.taskadapter.redmineapi.Include;
@@ -18,14 +19,42 @@ import com.taskadapter.redmineapi.bean.Journal;
 import es.eprinsa.redmine.MiIssue;
 
 @Named("incidenciasBean")
-@Stateful
 @SessionScoped
-public class Incidencias {
+public class Incidencias implements Serializable {
 
+	private static final long serialVersionUID = 4299371434956406294L;
 	List<MiIssue> lista;
+	int contador;
 	
-	public List<MiIssue> getLista() {
+	@Inject
+	InfoSesion info;
+	
+	public List<MiIssue> getLista() throws IOException {
+		try {
+			if (lista.size()==0) {
+				System.out.println("1");				
+				liberacionesConQuery();			
+			}			
+		} catch(NullPointerException e) {
+			System.out.println("2");			
+			liberacionesConQuery();
+		}
+		System.out.println("3");
+		
+		
 		return lista;
+	}
+
+	public int getContador()  throws IOException {
+		try {
+		return getLista().size();
+		} catch(NullPointerException e) {
+			return 0;
+		}
+	}
+
+	public void setContador(int contador) {
+		this.contador = contador;
 	}
 
 	public void setLista(List<MiIssue> lista) {
@@ -33,6 +62,7 @@ public class Incidencias {
 	}
 
 	public Incidencias() throws IOException {
+		/*
 		try {
 			if (getLista().size()==0) {
 				System.out.println("1");				
@@ -42,18 +72,20 @@ public class Incidencias {
 			System.out.println("2");			
 			liberacionesConQuery();
 		}
-
+		System.out.println("3");
+		*/
 	}
 
 	public void liberacionesConQuery() throws IOException {
 //		proyecto MIA = 74
 //		queryid = 1211
-		InfoSesion info = new InfoSesion();
+		//InfoSesion info = new InfoSesion();
 
 		Collection<MiIssue> miLista = new ArrayList<MiIssue>();
 		List<Issue>listaI = null;
 		try {		
-			System.out.println("liberacionesConQuery.");
+			
+			System.out.println("liberacionesConQuery.1");
 			IssueManager issueManager = info.getMgr().getIssueManager();
 			listaI = issueManager.getIssues("74", 1211, Include.journals);
 //			setLista(issueManager.getIssues("74", 1211, Include.journals));
@@ -92,6 +124,7 @@ public class Incidencias {
 		
 //		return lista;		
 		setLista(new ArrayList<MiIssue>(miLista));
+		System.out.println("fin liberacionesConQuery "+ getLista().size());
 	}		
 	
 }

@@ -2,26 +2,21 @@ package es.eprinsa.redmine.boundary;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.Properties;
 
-import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
-//import javax.faces.bean.ManagedBean;
-//import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 
 import com.taskadapter.redmineapi.RedmineManager;
 import com.taskadapter.redmineapi.RedmineManagerFactory;
 
-@Named("infoSessionBean")
-@Stateful
+
+@Named
 @SessionScoped
-//@ManagedBean
-//@SessionScoped
-public class InfoSesion {
+public class InfoSesion implements InfoSesionLocal, Serializable {
 
 	RedmineManager mgr;	
 	
@@ -43,11 +38,14 @@ public class InfoSesion {
 //			e.printStackTrace();
 //		}
 		
+System.out.println("InfoSesion inicializado!!");			
+			
 		setMgr(RedmineManagerFactory.createWithApiKey(uri, apiAccessKey));
 		//mgr = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey);
 		mgr.setObjectsPerPage(100);		
 	}
 
+	@Override
 	public RedmineManager getMgr() {
 		return mgr;
 	}

@@ -15,7 +15,7 @@
 		<p:commandButton action="#{jugadorBean.eliminar}" value="Eliminar jugador" update="tabla"/>
 		<p:commandButton value="Actualizar" action="#{jugadorBean.actualizar()}" update="tabla"/>				
 		<p:button value="Volver" outcome="/principal"/-->	
-		<h3>Lista de peticiones de liberación</h3>
+		<h3>Lista de peticiones de liberación 1(<p:outputLabel value="#{incidenciasBean.contador}"/>)</h3>
 		<!-- h:panelGrid columns="3">
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Nombre:"/>
@@ -43,7 +43,17 @@
 
 		</h:panelGrid>		
 	</h:form>
-	<p class="footer">Copyright © 2018 oruiz.eprinsa.es</p>	
+	<p class="footer">Copyright © 2018 oruiz.eprinsa.es</p>
+		
+<script>
+
+ var t = document.getElementById("listaJugadores:Cabecera");
+ for (var i = 1; i &lt; t.rows.length; i++) {
+    var objCells = t.rows.item(i).cells;
+    alert("hola");
+	objCells.item(3).innerHTML += " *** ";
+ }
+</script>	
 </body> 
 		
 </html>
