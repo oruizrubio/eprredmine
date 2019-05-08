@@ -25,7 +25,16 @@ public class Incidencias implements Serializable {
 	private static final long serialVersionUID = 4299371434956406294L;
 	List<MiIssue> lista;
 	int contador;
+	private String ejercicio;
 	
+	public String getEjercicio() {
+		return ejercicio;
+	}
+
+	public void setEjercicio(String ejercicio) {
+		this.ejercicio = ejercicio;
+	}
+
 	@Inject
 	InfoSesion info;
 	
@@ -74,20 +83,30 @@ public class Incidencias implements Serializable {
 		}
 		System.out.println("3");
 		*/
+		ejercicio = "2019";
 	}
 
 	public void liberacionesConQuery() throws IOException {
 //		proyecto MIA = 74
 //		queryid = 1211
 		//InfoSesion info = new InfoSesion();
+		Integer consulta = ejercicio.compareTo("2019")==0?1282:1211;
+		/*
+		Integer consulta;
+		try {
+			consulta = ejercicio.compareTo("2019")==0?1282:1211;
+		} catch(NullPointerException e) {
+			consulta = 1282;
+		}*/		
 
 		Collection<MiIssue> miLista = new ArrayList<MiIssue>();
 		List<Issue>listaI = null;
 		try {		
-			
+			// queryid:  1211 año 2018
+			// queryid:  1282 año 2019
 			System.out.println("liberacionesConQuery.1");
 			IssueManager issueManager = info.getMgr().getIssueManager();
-			listaI = issueManager.getIssues("74", 1211, Include.journals);
+			listaI = issueManager.getIssues("74", consulta, Include.journals);
 //			setLista(issueManager.getIssues("74", 1211, Include.journals));
 			
 			for (Issue r: listaI) {
@@ -124,7 +143,7 @@ public class Incidencias implements Serializable {
 		
 //		return lista;		
 		setLista(new ArrayList<MiIssue>(miLista));
-		System.out.println("fin liberacionesConQuery "+ getLista().size());
+		//System.out.println("fin liberacionesConQuery "+ getLista().size());
 	}		
 	
 }

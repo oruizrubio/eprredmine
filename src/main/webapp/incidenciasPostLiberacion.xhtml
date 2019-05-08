@@ -10,12 +10,24 @@
 <!-- f:metadata>
 	<f:viewAction action="#{jugadorBean.cargar}"></f:viewAction>
 </f:metadata-->
-	<h:form id="listaJugadores">
+
+<h:form id="listaJugadores">
+    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+        <h:outputText value="Seleccione Año:" />
+        <p:selectOneButton value="#{incidenciasBean.ejercicio}">
+            <f:selectItem itemLabel="2019" itemValue="2019" />
+            <f:selectItem itemLabel="2018" itemValue="2018" />
+        </p:selectOneButton>
+         
+        <p:commandButton value="Actualizar" action="#{incidenciasBean.liberacionesConQuery}" update="tabla contador" />
+        <p:spacer />         
+    </h:panelGrid>
+
 		<!-- p:button value="Añadir jugador" outcome="anadir"/>
 		<p:commandButton action="#{jugadorBean.eliminar}" value="Eliminar jugador" update="tabla"/>
 		<p:commandButton value="Actualizar" action="#{jugadorBean.actualizar()}" update="tabla"/>				
 		<p:button value="Volver" outcome="/principal"/-->	
-		<h3>Lista de peticiones de liberación 1(<p:outputLabel value="#{incidenciasBean.contador}"/>)</h3>
+		<h3>Lista de peticiones de liberación (<p:outputLabel id="contador" value="#{incidenciasBean.contador}"/>)</h3>
 		<!-- h:panelGrid columns="3">
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Nombre:"/>
@@ -45,7 +57,7 @@
 	</h:form>
 	<p class="footer">Copyright © 2018 oruiz.eprinsa.es</p>
 		
-<script>
+<!-- script>
 
  var t = document.getElementById("listaJugadores:Cabecera");
  for (var i = 1; i &lt; t.rows.length; i++) {
@@ -53,7 +65,7 @@
     alert("hola");
 	objCells.item(3).innerHTML += " *** ";
  }
-</script>	
+</script-->	
 </body> 
 		
 </html>
